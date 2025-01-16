@@ -1,14 +1,15 @@
-from gen import Tree
+import os
 from math import atan, cos, sin, pi
-from demo_trees import trees
-from buchheim import buchheim as layout
 from PIL import Image, ImageDraw
 
-t = layout(trees[8])
+from src.tree import Tree
+from demo.demo_trees import trees
+from src.buchheim import buchheim as layout
+
 
 DIAMETER = 30
 SPACING_VERTICAL = DIAMETER * 1.5
-SPACING_HORIZONTAL = DIAMETER * 1.5
+SPACING_HORIZONTAL = DIAMETER * 2
 
 
 def drawt(draw, root, depth):
@@ -42,9 +43,7 @@ def drawconn(draw, root, depth):
 
 def dottedline(draw, x1, y1, x2, y2):
     segment = 5
-    if x2 == x1:
-        theta = pi / 2
-    elif x2 - x1 > 0:
+    if x2 - x1 > 0:
         theta = atan(float(y2 - y1) / float(x2 - x1))
     else:
         theta = pi + atan(float(y2 - y1) / float(x2 - x1))
@@ -75,10 +74,18 @@ def drawthreads(draw, root, depth):
         drawthreads(draw, child, depth + 1)
 
 
-im = Image.new("L", (1000, 500), (255))
-draw = ImageDraw.Draw(im)
-drawconn(draw, t, 0)
-drawthreads(draw, t, 0)
-drawt(draw, t, 0)
+if __name__ == '__main__':
+    tree = trees[4][1]
+    tree[0][1].children.append(Tree("a"))
+    tree[0][1].children.append(Tree("b"))
+    t = layout(trees[4][1])
 
-im.save("figure7.png")
+    im = Image.new("L", (1000, 500), (255))
+    draw = ImageDraw.Draw(im)
+    drawconn(draw, t, 0)
+    drawthreads(draw, t, 0)
+    drawt(draw, t, 0)
+
+    if not os.path.exists('out/'):
+        os.makedirs('out/')
+    im.save("out/figure6.png")

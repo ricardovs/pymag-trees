@@ -1,23 +1,13 @@
+import os
 from math import atan, sin, cos, pi
 from PIL import Image, ImageDraw
 from demo_trees import trees
-from reingold_thread import reingold_tilford as rt
 
-# from reingold_naive import reingold_tilford as rt
-from buchheim import buchheim
+from src.reingold_thread import reingold_tilford as rt
+# from src.reingold_naive import reingold_tilford as rt
 
+from src.buchheim import buchheim
 
-def mirror(t):
-    if len(t.children) > 1:
-        t.children = tuple(reversed(t.children))
-    for c in t.children:
-        mirror(c)
-    return t
-
-
-t = buchheim(trees[8])
-# t = buchheim(trees[9])
-# t = rt(trees[4])
 
 DIAMETER = 30
 SPACING_VERTICAL = DIAMETER * 1.5
@@ -96,11 +86,16 @@ def drawthreads(draw, root, depth):
             )
         drawthreads(draw, child, depth + 1)
 
+if __name__ == '__main__':
+    # print trees[5][0]
+    t = buchheim(trees[5])
+    # t = rt(trees[5])
 
-im = Image.new("L", (1000, 550), (255))
-draw = ImageDraw.Draw(im)
-drawconn(draw, t, 0)
-drawthreads(draw, t, 0)
-drawt(draw, t, 0)
-
-im.save("draw_nary.png")
+    im = Image.new("L", (500, 500), (255))
+    draw = ImageDraw.Draw(im)
+    drawconn(draw, t, 0)
+    drawthreads(draw, t, 0)
+    drawt(draw, t, 0)
+    if not os.path.exists('out/'):
+        os.makedirs('out/')
+    im.save("out/drawtree.png")

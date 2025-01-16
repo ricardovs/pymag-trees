@@ -1,9 +1,9 @@
-from gen import Tree
-from demo_trees import trees
-from buchheim import buchheim
+import os
+from src.tree import Tree
+from demo.demo_trees import trees
+from src.ws2 import layout
 from PIL import Image, ImageDraw
 
-t = buchheim(trees[6])
 
 DIAMETER = 30
 SPACING_VERTICAL = DIAMETER * 1.5
@@ -39,9 +39,14 @@ def drawconn(draw, root, depth):
         drawconn(draw, child, depth + 1)
 
 
-im = Image.new("L", (1000, 500), (255))
-draw = ImageDraw.Draw(im)
-drawconn(draw, t, 0)
-drawt(draw, t, 0)
+if __name__ == '__main__':
+    t = layout(trees[3])
 
-im.save("figure1.png")
+    im = Image.new("L", (1000, 500), (255))
+    draw = ImageDraw.Draw(im)
+    drawconn(draw, t, 0)
+    drawt(draw, t, 0)
+
+    if not os.path.exists('out/'):
+        os.makedirs('out/')
+    im.save("out/figure4.png")

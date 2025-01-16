@@ -1,12 +1,11 @@
+import os
 from demo_trees import trees
-from ws2 import layout
+from src.knuth import layout
 from PIL import Image, ImageDraw
-
-t = layout(trees[5])
 
 DIAMETER = 30
 SPACING_VERTICAL = DIAMETER * 1.5
-SPACING_HORIZONTAL = DIAMETER * 2
+SPACING_HORIZONTAL = DIAMETER * 1.5
 
 
 def drawt(draw, root, depth):
@@ -38,9 +37,14 @@ def drawconn(draw, root, depth):
         drawconn(draw, child, depth + 1)
 
 
-im = Image.new("L", (1000, 500), (255))
-draw = ImageDraw.Draw(im)
-drawconn(draw, t, 0)
-drawt(draw, t, 0)
+if __name__ == '__main__':
+    t = layout(trees[5])
 
-im.save("ws2.png")
+    im = Image.new("L", (1000, 500), (255))
+    draw = ImageDraw.Draw(im)
+    drawconn(draw, t, 0)
+    drawt(draw, t, 0)
+
+    if not os.path.exists('out/'):
+        os.makedirs('out/')
+    im.save("out/knuthdraw.png")

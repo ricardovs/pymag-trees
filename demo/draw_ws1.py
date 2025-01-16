@@ -1,13 +1,11 @@
-from gen import Tree
+import os
 from demo_trees import trees
-from ws2 import layout
+from src.ws1 import layout
 from PIL import Image, ImageDraw
-
-t = layout(trees[3])
 
 DIAMETER = 30
 SPACING_VERTICAL = DIAMETER * 1.5
-SPACING_HORIZONTAL = DIAMETER * 1.5
+SPACING_HORIZONTAL = DIAMETER * 2
 
 
 def drawt(draw, root, depth):
@@ -38,10 +36,13 @@ def drawconn(draw, root, depth):
         )
         drawconn(draw, child, depth + 1)
 
+if __name__ == '__main__':
+    t = layout(trees[4])
 
-im = Image.new("L", (1000, 500), (255))
-draw = ImageDraw.Draw(im)
-drawconn(draw, t, 0)
-drawt(draw, t, 0)
-
-im.save("figure4.png")
+    im = Image.new("L", (1000, 500), (255))
+    draw = ImageDraw.Draw(im)
+    drawconn(draw, t, 0)
+    drawt(draw, t, 0)
+    if not os.path.exists('out/'):
+        os.makedirs('out/')
+    im.save("out/ws1.png")

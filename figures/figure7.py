@@ -1,15 +1,10 @@
-from math import atan, sin, cos, pi
+import os
+from src.tree import Tree
+from math import atan, cos, sin, pi
+from demo.demo_trees import trees
+from src.buchheim import buchheim as layout
 from PIL import Image, ImageDraw
-from demo_trees import trees
-from reingold_thread import reingold_tilford as rt
 
-# from reingold_naive import reingold_tilford as rt
-from buchheim import buchheim
-
-
-# print trees[5][0]
-t = buchheim(trees[5])
-# t = rt(trees[5])
 
 DIAMETER = 30
 SPACING_VERTICAL = DIAMETER * 1.5
@@ -43,15 +38,6 @@ def drawconn(draw, root, depth):
             fill=(0),
         )
         drawconn(draw, child, depth + 1)
-
-
-def sign(x):
-    if x == 0:
-        return 0
-    if x > 0:
-        return 1
-    else:
-        return -1
 
 
 def dottedline(draw, x1, y1, x2, y2):
@@ -89,10 +75,15 @@ def drawthreads(draw, root, depth):
         drawthreads(draw, child, depth + 1)
 
 
-im = Image.new("L", (500, 500), (255))
-draw = ImageDraw.Draw(im)
-drawconn(draw, t, 0)
-drawthreads(draw, t, 0)
-drawt(draw, t, 0)
+if __name__ == '__main__':
+    t = layout(trees[8])
 
-im.save("drawtree.png")
+    im = Image.new("L", (1000, 500), (255))
+    draw = ImageDraw.Draw(im)
+    drawconn(draw, t, 0)
+    drawthreads(draw, t, 0)
+    drawt(draw, t, 0)
+
+    if not os.path.exists('out/'):
+        os.makedirs('out/')
+    im.save("out/figure7.png")

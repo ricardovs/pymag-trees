@@ -1,8 +1,9 @@
-from demo_trees import trees
-from knuth import layout
+import os
+from src.tree import Tree
+from demo.demo_trees import trees
+from src.ws1 import layout
 from PIL import Image, ImageDraw
 
-t = layout(trees[5])
 
 DIAMETER = 30
 SPACING_VERTICAL = DIAMETER * 1.5
@@ -38,9 +39,14 @@ def drawconn(draw, root, depth):
         drawconn(draw, child, depth + 1)
 
 
-im = Image.new("L", (1000, 500), (255))
-draw = ImageDraw.Draw(im)
-drawconn(draw, t, 0)
-drawt(draw, t, 0)
+if __name__ == '__main__':
+    t = layout(trees[4])
 
-im.save("knuthdraw.png")
+    im = Image.new("L", (1000, 500), (255))
+    draw = ImageDraw.Draw(im)
+    drawconn(draw, t, 0)
+    drawt(draw, t, 0)
+
+    if not os.path.exists('out/'):
+        os.makedirs('out/')
+    im.save("out/figure3.png")

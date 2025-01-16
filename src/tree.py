@@ -1,6 +1,5 @@
 import os
 
-
 class Tree:
     def __init__(self, node="", *children):
         self.node = node
@@ -30,6 +29,17 @@ class Tree:
     def __len__(self):
         return len(self.children)
 
+    def create_node(self, node):
+        self.children.append(Tree(node=node))
+
+    def deepsearch(self, node):
+        if self.node == node:
+            return self
+        for i in range(len(self.children)):
+            child = self.children[i].deepsearch(node)
+            if not child is None:
+                return child
+        return None
 
 def gentree(path):
     root = Tree(os.path.basename(path))

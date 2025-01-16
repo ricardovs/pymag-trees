@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pymag-trees"
+version = "0.0.1"
+authors = [
+  { name="Ricardo Silva", email="ric1500ric@gmail.com" },
+]
+description = "Code from the article 'Drawing Good-looking Trees' in Python Magazine"
+readme = "README.txt"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "WTFPL"
+license-files = ["LICEN[CS]E*"]
+requires-python = ">=3.8"
+dependencies = [
+    "pillow~=11.1.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[project.urls]
+Homepage = "https://github.com/ricardovs/pymag-trees/tree/master"
+Issues = "https://github.com/ricardovs/pymag-trees/tree/master/issues"

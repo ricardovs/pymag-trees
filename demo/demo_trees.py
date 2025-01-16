@@ -1,4 +1,4 @@
-from gen import Tree
+from src.tree import Tree
 
 trees = [
 #0 simple test
