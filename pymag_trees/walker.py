@@ -1,8 +1,3 @@
-from tree import Tree, gentree
-from operator import lt, gt
-from sys import stdout
-
-
 class DrawTree:
     def __init__(self, tree, parent, depth=-1):
         self.x = -1

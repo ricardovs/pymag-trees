@@ -1,6 +1,3 @@
-from sys import stdout
-
-
 class DrawTree:
     def __init__(self, tree, depth=-1):
         self.x = -1
@@ -15,6 +12,21 @@ class DrawTree:
 
     def right(self):
         return self.thread or len(self.children) and self.children[-1]
+
+    def __getitem__(self, key):
+        if isinstance(key, int) or isinstance(key, slice):
+            return self.children[key]
+        if isinstance(key, str):
+            for child in self.children:
+                if child.node == key:
+                    return child
+
+    def __iter__(self):
+        return self.children.__iter__()
+
+    def __len__(self):
+        return len(self.children)
+
 
 
 # traverse to the bottom of the tree, and place the leaves at an arbitrary
@@ -77,7 +89,7 @@ def fix_subtrees(left, right):
         ro.thread = li
         ro.mod = loffset - roffset
 
-    return (left.x + right.x) / 2
+    return (left.x + right.x) // 2
 
 
 def contour(
@@ -108,47 +120,3 @@ def contour(
         return contour(li, ri, max_offset, loffset, roffset, lo, ro)
 
     return li, ri, max_offset, loffset, roffset, left_outer, right_outer
-
-
-# given an array of nodes, print them out reasonably on one line
-
-
-def printrow(level):
-    x = dict((t.x, t.tree) for t in level)
-    for i in range(max(x.keys()) + 1):
-        try:
-            stdout.write(str(x[i])[:4])
-        except:
-            stdout.write("    ")
-
-
-def p(tree):
-    level = [tree]
-    while 1:
-        newlevel = []
-        printrow(level)
-        for t in level:
-            newlevel.extend(t.children[:2])
-        print
-        if not newlevel:
-            break
-        level = newlevel
-
-
-if __name__ == "__main__":
-
-    def mirror(t):
-        if len(t.children) > 1:
-            t.children = (t.children[1], t.children[0])
-        for c in t.children:
-            mirror(c)
-        return t
-
-    from pymag_trees.demo.trees import trees
-
-    layout(mirror(trees[10]))
-
-# root = gentree("/Users/llimllib/Movies")
-# root.children.reverse()
-# drawtree = reingold_tilford(root)
-# p(drawtree)
