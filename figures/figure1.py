@@ -1,7 +1,7 @@
 import os
-from src.tree import Tree
-from demo.demo_trees import trees
-from src.buchheim import buchheim
+from pymag_trees.tree import Tree
+from pymag_trees.demo.trees import trees
+from pymag_trees.buchheim import buchheim
 from PIL import Image, ImageDraw
 
 

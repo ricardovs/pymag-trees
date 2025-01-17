@@ -22,7 +22,7 @@ dependencies = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src"]
+packages = ["pymag_trees"]
 
 [project.urls]
 Homepage = "https://github.com/ricardovs/pymag-trees/tree/master"

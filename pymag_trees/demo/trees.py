@@ -1,4 +1,4 @@
-from src.tree import Tree
+from pymag_trees.tree import Tree
 
 trees = [
 #0 simple test

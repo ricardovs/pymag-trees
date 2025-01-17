@@ -1,6 +1,6 @@
 import os
-from demo_trees import trees
-from src.ws2 import layout
+from pymag_trees.demo.trees import trees
+from pymag_trees.ws2 import layout
 from PIL import Image, ImageDraw
 
 DIAMETER = 30

@@ -2,12 +2,12 @@ import os
 from math import atan, sin, cos, pi
 from PIL import Image, ImageDraw
 
-from demo_trees import trees
+from pymag_trees.demo.trees import trees
 
-from src.reingold_thread import reingold_tilford as rt
-# from src.reingold_naive import reingold_tilford as rt
+from pymag_trees.reingold_thread import reingold_tilford as rt
+# from pymag_trees.reingold_naive import reingold_tilford as rt
 
-from src.buchheim import buchheim
+from pymag_trees.buchheim import buchheim
 
 
 DIAMETER = 30

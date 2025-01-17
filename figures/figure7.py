@@ -1,8 +1,8 @@
 import os
-from src.tree import Tree
+from pymag_trees.tree import Tree
 from math import atan, cos, sin, pi
-from demo.demo_trees import trees
-from src.buchheim import buchheim as layout
+from pymag_trees.demo.trees import trees
+from pymag_trees.buchheim import buchheim as layout
 from PIL import Image, ImageDraw
 
 

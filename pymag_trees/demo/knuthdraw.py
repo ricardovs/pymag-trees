@@ -1,6 +1,6 @@
 import os
-from demo_trees import trees
-from src.knuth import layout
+from pymag_trees.demo.trees import trees
+from pymag_trees.knuth import layout
 from PIL import Image, ImageDraw
 
 DIAMETER = 30

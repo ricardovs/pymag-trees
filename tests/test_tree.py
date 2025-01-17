@@ -1,4 +1,4 @@
-from demo.demo_trees import trees
+from pymag_trees.demo.trees import trees
 import unittest
 
 
@@ -67,7 +67,7 @@ class TestNaryTree(TreeTest):
 
 class TestNaive(TestBinTree):
     def setUp(self):
-        import src.reingold_naive as reingold_naive
+        import pymag_trees.reingold_naive as reingold_naive
 
         self.f = reingold_naive.reingold_tilford
 
@@ -76,21 +76,21 @@ class TestThread(TestBinTree):
     # TODO: My current tests didn't make the lattach bug fail... write a test
     #      that does. (See r116, reingold_thread.py)
     def setUp(self):
-        import src.reingold_thread as reingold_thread
+        import pymag_trees.reingold_thread as reingold_thread
 
         self.f = reingold_thread.reingold_tilford
 
 
 class TestAddMod(TestBinTree):
     def setUp(self):
-        import src.reingold_addmod as reingold_addmod
+        import pymag_trees.reingold_addmod as reingold_addmod
 
         self.f = reingold_addmod.layout
 
 
 class TestBuchheim(TestBinTree, TestNaryTree):
     def setUp(self):
-        import src.buchheim as buchheim
+        import pymag_trees.buchheim as buchheim
 
         self.f = buchheim.buchheim
 

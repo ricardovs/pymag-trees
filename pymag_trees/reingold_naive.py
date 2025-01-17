@@ -1,4 +1,4 @@
-from src.tree import Tree, gentree
+from pymag_trees.tree import Tree, gentree
 from operator import lt, gt
 from sys import stdout
 

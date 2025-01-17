@@ -144,7 +144,7 @@ if __name__ == "__main__":
             mirror(c)
         return t
 
-    from demo_trees import trees
+    from pymag_trees.demo.trees import trees
 
     layout(mirror(trees[10]))
 
