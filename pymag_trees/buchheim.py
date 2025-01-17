@@ -1,3 +1,7 @@
+import logging
+
+logger = logging.getLogger(__name__)
+
 class DrawTree(object):
     def __init__(self, tree, parent=None, depth=0, number=1):
         self.x = -1.0
@@ -70,7 +74,7 @@ def firstwalk(v, distance=1.0):
         for w in v.children:
             firstwalk(w)
             default_ancestor = apportion(w, default_ancestor, distance)
-        print("finished v =", v.tree, "children")
+        logger.info(f"finished v = {v.tree} children")
         execute_shifts(v)
 
         midpoint = (v.children[0].x + v.children[-1].x) / 2
@@ -125,7 +129,7 @@ def apportion(v, default_ancestor, distance):
 
 def move_subtree(wl, wr, shift):
     subtrees = wr.number - wl.number
-    print(wl.tree, "is conflicted with", wr.tree, "moving", subtrees, "shift", shift)
+    logger.info(f"{wl.tree} is conflicted with {wr.tree} moving {subtrees} shift {shift}")
     # print wl, wr, wr.number, wl.number, shift, subtrees, shift/subtrees
     wr.change -= shift / subtrees
     wr.shift += shift
@@ -137,7 +141,7 @@ def move_subtree(wl, wr, shift):
 def execute_shifts(v):
     shift = change = 0
     for w in v.children[::-1]:
-        print("shift:", w, shift, w.change)
+        logger.info(f"shift: {w} {shift} {w.change}")
         w.x += shift
         w.mod += shift
         change += w.change
