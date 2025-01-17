@@ -36,9 +36,9 @@ def drawconn(draw, root, depth):
         )
         drawconn(draw, child, depth + 1)
 
-
-# im = Image.new('L', (1000, 500), (255))
-# draw = ImageDraw.Draw(im)
-# drawconn(draw, dt, 0)
-# drawt(draw, dt, 0)
-# im.save('buchheim.png')
+def save_draw(drawtree, filename='figura.png'):
+    im = Image.new('L', (1000, 500), (255))
+    draw = ImageDraw.Draw(im)
+    drawconn(draw, drawtree, 0)
+    drawt(draw, drawtree, 0)
+    im.save(filename)
