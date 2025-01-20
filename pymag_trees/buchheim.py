@@ -4,6 +4,7 @@ logger = logging.getLogger(__name__)
 
 class DrawTree(object):
     def __init__(self, tree, parent=None, depth=0, number=1):
+        self.node = tree
         self.x = -1.0
         self.y = depth
         self.tree = tree
